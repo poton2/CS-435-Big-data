@@ -29,7 +29,7 @@ Using Apache Spark
 
 **PageRank**
 
-A sorted list of Wikipedia pages based on their ideal PageRank value in descending
+A sorted list (in descending order) of Wikipedia pages based on their ideal PageRank value in descending
 order. Each row should contain the title of the article and its PageRank value. This computation is performed in my own Spark cluster with 5 machines with results from 25 iterations.
 
 **Taxation**
@@ -38,3 +38,8 @@ A sorted list (in descending order) of Wikipedia pages based on their PageRank
 value with taxation. Each row should contain the title of the article and its PageRank
 value. This computation should be performed in my own Spark cluster with 5
 machines with results from at least 25 iterations.
+
+**WikipediaBomb**
+
+A Wikipedia Bomb that returns the “Rocky Mountain National Park” wikipedia page
+for the search key word “surfing” (see 3.C)
