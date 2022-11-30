@@ -44,7 +44,7 @@ public class NgramMapReduce extends Configured implements Tool{
     }
 
     public static class TokenizerMapper extends Mapper<Object, BytesWritable, Text, VolumeWriteable> {
-        //#TODO#: define and initialize some class variables
+     
         MapWritable map = new MapWritable();
         IntWritable one = new IntWritable(1);
 
@@ -57,15 +57,13 @@ public class NgramMapReduce extends Configured implements Tool{
 
         public void map(Object key, BytesWritable bWriteable, Context context) throws IOException, InterruptedException {
             Profiles profile = context.getConfiguration().getEnum("profile", Profiles.A1); //get profile
-            //#TODO#: initial update of appropriate TokenizerMapper class variable(s)
-            // code to get a book
             volume.insertMapValue(one,one);
 
             String rawText = new String(bWriteable.getBytes());
             Book book = new Book(rawText, profile.ngramNum);
             StringTokenizer itr = new StringTokenizer(book.getBookBody());
 
-            //#TODO#: define any helper variables you need before looping through tokens
+            
             if(profile.profileChar == 'a') {
                 if (profile.ngramNum == 1){
                     while (itr.hasMoreTokens()) {
@@ -127,7 +125,7 @@ public class NgramMapReduce extends Configured implements Tool{
         private MapWritable map = new MapWritable();
         private  IntWritable volumenum = new IntWritable(1);
         public void reduce(Text key, Iterable<VolumeWriteable> values, Context context) throws IOException, InterruptedException {
-            //#TODO#: implement reducer
+           
 
             int sum = 0;
             for(VolumeWriteable val: values){
@@ -142,12 +140,8 @@ public class NgramMapReduce extends Configured implements Tool{
     }
 
     public static int runJob(Configuration conf, String inputDir, String outputDir) throws Exception {
-        // function to run job
-
+      
         Job job = Job.getInstance(conf, "ngram");
-
-        //specify classes for Map Reduce tasks
-        //#TODO#: update SPECIFYCLASS.class placeholders with appropriate class names
 
         job.setInputFormatClass(WholeFileInputFormat.class);
         job.setJarByClass(NgramMapReduce.class);
@@ -165,16 +159,12 @@ public class NgramMapReduce extends Configured implements Tool{
     }
 
     public static void main(String[] args) throws Exception {
-        //ToolRunner allows for command line configuration parameters - suitable for shifting between local job and yarn
-        // example command: hadoop jar <path_to_jar.jar> <main_class> -D param=value <input_path> <output_path>
-        //We use -D mapreduce.framework.name=<value> where <value>=local means the job is run locally and <value>=yarn means using YARN
         int res = ToolRunner.run(new Configuration(), new NgramMapReduce(), args);
         System.exit(res); //res will be 0 if all tasks are executed succesfully and 1 otherwise
     }
 
     @Override
     public int run(String[] args) throws Exception {
-        //#TODO#: update few things
         Configuration conf = this.getConf();
         Profiles profiles[] = {Profiles.A1, Profiles.A2, Profiles.B1, Profiles.B2};
         for(Profiles p : profiles) {
