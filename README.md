@@ -42,4 +42,6 @@ machines with results from at least 25 iterations.
 **WikipediaBomb**
 
 A Wikipedia Bomb that returns the “Rocky Mountain National Park” wikipedia page
-for the search key word “surfing” (see 3.C)
+for the search key word “surfing” (see 3.C) In order to do that, I modified
+the link data file and show that the “Rocky Mountain National Park” page generates
+highest PageRank among all of the pages containing “surfing” as part of their titles
